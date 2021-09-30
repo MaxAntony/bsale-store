@@ -8,7 +8,6 @@ class ProductControllers {
   static getAll = async (req, res) => {
     try {
       let products = await Product.findAll({ include: [{ model: Category }] });
-      console.log(products);
       res.json(products);
     } catch (e) {
       console.error(e);
@@ -22,11 +21,11 @@ class ProductControllers {
   static getById = async (req, res) => {
     let { id } = req.params;
     try {
-      let products = await Product.findAll({ where: { id }, include: [{ model: Category }] });
-      res.json(products);
+      let product = await Product.findAll({ where: { id }, include: [{ model: Category }] });
+      res.json(product);
     } catch (e) {
       console.error(e);
-      res.status(500).json({ error: 'Error getting products' });
+      res.status(500).json({ error: 'Error getting product' });
     }
   };
 }
