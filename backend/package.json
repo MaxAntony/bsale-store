@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel -d ./build ./src -s",
+    "clean": "rm -rf build && mkdir build",
+    "dev:local": "rm -rf build && cross-env NODE_ENV=development nodemon",
+    "dev:composer": "rm -rf build && nodemon",
+    "start": "npm run build && cross-env NODE_ENV=production node ./build/app.js",
+    "start:composer": "node ./build/app.js",
+    "start-db": "docker start dev-postgres"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13",
+    "sequelize": "^6.6.5",
+    "umzug": "^3.0.0-beta.16"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "cross-env": "^7.0.3"
+  }
+}
