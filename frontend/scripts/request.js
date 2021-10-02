@@ -1,5 +1,5 @@
 class Request {
-  serverUrl = 'http://localhost:4000/api';
+  serverUrl = 'http://localhost:5000/api';
 
   constructor(resource) {
     this.resourceUrl = `${this.serverUrl}/${resource}`;

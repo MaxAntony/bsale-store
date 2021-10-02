@@ -18,12 +18,26 @@ Dom.getSearchButton().addEventListener('click', async (e) => {
   Dom.cleanProducts();
   Dom.showLoading();
   let searchText = Dom.getSearchText();
-  let productsJson;
+  let productsJson = [];
   if (searchText.length > 0) {
     productsJson = await products.search(searchText);
   } else {
     productsJson = await products.getAll();
   }
+
+  if (productsJson.length > 0) {
+    Dom.loadProducts(productsJson);
+  } else {
+    Dom.showNoResults();
+  }
+  Dom.hideLoading();
+});
+
+Dom.getHomeLogo().addEventListener('click', async (e) => {
+  e.preventDefault();
+  Dom.cleanProducts();
+  Dom.showLoading();
+  let productsJson = await products.getAll();
   Dom.loadProducts(productsJson);
   Dom.hideLoading();
 });

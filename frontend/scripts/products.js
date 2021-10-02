@@ -7,11 +7,18 @@ class Products {
     this.request = new Request(this.resourceName);
   }
 
+  /**
+   * @returns {Promise<[]>}
+   */
   async getAll() {
     let products = await this.request.get();
     return products;
   }
 
+  /**
+   * @param {string} searchText
+   * @returns {Promise<[]>}
+   */
   async search(searchText) {
     let products = await this.request.get(`/search/${searchText}`);
     return products;

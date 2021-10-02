@@ -39,6 +39,24 @@ class Dom {
     loading.classList.remove('d-none');
   }
 
+  static showNoResults() {
+    this.cleanProducts();
+    let row = this.getProductContainerRow();
+    let noResults = document.createElement('h1');
+    noResults.textContent = 'Sin resultados';
+    noResults.classList.add('text-center');
+    noResults.classList.add('p-5');
+    row.appendChild(noResults);
+  }
+  static showCategoryName(categoryName) {
+    let categoryTitle = document.createElement('h2');
+    categoryTitle.textContent = `Categoria: ${categoryName}`;
+    categoryTitle.classList.add('text-center');
+    categoryTitle.classList.add('p-3');
+    let row = this.getProductContainerRow();
+    row.insertBefore(categoryTitle, row.firstChild);
+  }
+
   static hideLoading() {
     let loading = document.getElementById('loading');
     loading.classList.add('d-none');
@@ -63,7 +81,10 @@ class Dom {
 <div style="width:100%" class="d-flex justify-content-between align-items-center">      <p class="card-text mb-0">
 ${formatPrice(price)}
 </p>
-<a href="#" class="btn btn-primary">Comprar</a></div>
+<a href="https://api.whatsapp.com/send?phone=51933689685&text=Hola,%20necesito%20comprar%20el%20producto%20${name.replace(
+      ' ',
+      '%20',
+    )}" target="_blank" class="btn btn-primary">Comprar</a></div>
     </div>
   </div>`;
     let cardHtml = this.htmlToElement(card);
@@ -87,10 +108,11 @@ ${formatPrice(price)}
     }
   }
 
+  /**
+   * @param {[]} productsJson
+   */
   static async loadProducts(productsJson) {
-    this.cleanProducts();
-
-    let row = document.querySelector('#products-container .row');
+    let row = this.getProductContainerRow();
     for (const product of productsJson) {
       let productHtml = this.createCardProduct(product);
       let column = document.createElement('div');
@@ -110,10 +132,15 @@ ${formatPrice(price)}
         let categoryId = +e.target.getAttribute('category-id');
         let productsJson = await products.getByCategory(categoryId);
         this.loadProducts(productsJson);
+        this.showCategoryName(e.target.textContent);
         this.hideLoading();
       });
       element.appendChild(categoryEl);
     }
+  }
+
+  static getProductContainerRow() {
+    return document.querySelector('#products-container .row');
   }
 
   static getSearchText() {
@@ -130,6 +157,10 @@ ${formatPrice(price)}
 
   static getModalProduct() {
     return document.getElementById('modal-product');
+  }
+
+  static getHomeLogo() {
+    return document.getElementById('home-logo');
   }
 }
 
