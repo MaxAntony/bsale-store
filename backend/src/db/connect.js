@@ -9,6 +9,7 @@ const db = new Sequelize({
   database,
   dialect: 'mysql',
   define: { freezeTableName: true, underscored: true },
+  logging: false,
 });
 
 async function connectDB() {
