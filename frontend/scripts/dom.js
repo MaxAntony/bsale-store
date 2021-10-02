@@ -81,7 +81,7 @@ class Dom {
 <div style="width:100%" class="d-flex justify-content-between align-items-center">      <p class="card-text mb-0">
 ${formatPrice(price)}
 </p>
-<a href="https://api.whatsapp.com/send?phone=51933689685&text=Hola,%20necesito%20comprar%20el%20producto%20${name.replace(
+<a href="https://api.whatsapp.com/send?phone=51997286267&text=Hola,%20necesito%20comprar%20el%20producto%20${name.replace(
       ' ',
       '%20',
     )}" target="_blank" class="btn btn-primary">Comprar</a></div>
